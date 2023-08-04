@@ -1,7 +1,56 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$(function () {
+$(".saveBtn").click(function () {
+  var timeBlock = $(this).parent();
+  var hour = timeBlock.attr('id');
+  localStorage.setItem(hour, userInput);
+  
+  //applying 'past, 'present', and 'future' class
+  var currentHour = dayjs().hour();
+  $(".time-block").each(function() {
+    var hour = parseInt($(this).attr('id').split('-')[i]);
+    if (hour < currentHour) {
+      $(this).addClass('past');
+    } else if (hour === currentHour) {
+      $(this).addClass('present');
+    } else {
+      $(this).addClass('future');
+    }
+  })
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -32,5 +81,4 @@ $(function () {
 
 
 
-  // TODO: Add code to display the current date in the header of the page. 
-});
+  // TODO: Add code to display the current date in the header of the page.
