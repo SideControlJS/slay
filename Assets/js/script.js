@@ -3,6 +3,9 @@
 // in the html.
 
 //display the current date using Day.js
+
+//making call to jQuery using "$()"
+
 $("#currentDay").text(dayjs().format('MMMM D, YYYY'));
 
 $(document).ready(function () {
@@ -30,11 +33,14 @@ $(document).ready(function () {
       timeStatus = "future";
     }
 
+    //adjusting for the hour display for 12PM
+    var displayHour = i === 12 ? '12PM' : (i <= 11 ? i + 'AM' : (i - 12) + 'PM');
+
     var newTimeBlock = $(`<div class="row time-block ${timeStatus}" id="hour-${i}">
-        <div class="col-1 hour">${i <= 11 ? i + 'AM' : (i - 12) + 'PM'}</div>
-        <textarea class="col-10 description"></textarea>
-        <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-          <i class="fas fa-save" aria-hidden="true"></i>
+    <div class="col-2 col-md-1 hour text-center py-3">${displayHour}</div>
+    <textarea class="col-8 col-md-10 description" rows="3"></textarea>
+    <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+      <i class="fas fa-save" aria-hidden="true"></i>
     </div>`);
 
     lastTimeBlock.after(newTimeBlock);
