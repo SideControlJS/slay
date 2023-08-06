@@ -9,14 +9,6 @@
 $("#currentDay").text(dayjs().format('MMMM D, YYYY'));
 
 $(document).ready(function () {
-  //load tasks from locatStorage
-  $('.time-block').each(function() {
-    var hour = $(this).attr('id').split('-')[1];
-    var storedValue = localStorage.getItem('hour-' + hour);
-    if (storedValue) {
-      $(this).find('textarea').val(storedValue);
-    }
-  });
 
   //dynamically generate the time blocks for 12PM to 5PM
   var lastTimeBlock = $(".time-block").last();
@@ -40,7 +32,7 @@ $(document).ready(function () {
     <div class="col-2 col-md-1 hour text-center py-3">${displayHour}</div>
     <textarea class="col-8 col-md-10 description" rows="3"></textarea>
     <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-      <i class="fas fa-save" aria-hidden="true"></i>
+      <i class="fas fa-save"></i>
     </div>`);
 
     lastTimeBlock.after(newTimeBlock);
@@ -55,6 +47,15 @@ $(document).ready(function () {
     localStorage.setItem(hour, userInput);
   });
 
+    //load tasks from locatStorage
+    $('.time-block').each(function() {
+      var hour = $(this).attr('id').split('-')[1];
+      var storedValue = localStorage.getItem('hour-' + hour);
+      if (storedValue) {
+        $(this).find('textarea').val(storedValue);
+      }
+    });
+
   //applying 'past, 'present', and 'future' class
   $(".time-block").each(function() {
     var blockHour = parseInt($(this).attr('id').split('-')[1]);
@@ -63,7 +64,7 @@ $(document).ready(function () {
     } else if (blockHour === currentHour) {
       $(this).removeClass('past future').addclass('present');
     } else {
-      $(this).removeClass('past present').addClass('future');
+      $(this).addClass('past present').addClass('future');
     }
   });
 
